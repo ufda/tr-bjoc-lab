@@ -41,7 +41,7 @@ function welcome(){
     return {
         "text": "What can I help you?",
         "attachments": [ {
-            "title": "ThomsonReuters Beijing Operation Center Innovation Lab",
+            "title": "TR BJOC Innovation Lab",
             "title_link": "https://www.thomsonreuters.cn",
             "color": "#f49e42",
             "thumb_url": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg"
