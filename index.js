@@ -25,7 +25,7 @@ restService.post('/slack-test', function(req, res) {
     
     var action = req.body.result.action;
     
-    var slack_message = tr();
+    var slack_message = welcome();
     
     return res.json({
         speech: "speech",
@@ -36,6 +36,18 @@ restService.post('/slack-test', function(req, res) {
         }
     });
 });
+
+function welcome(){
+    return {
+        "text": "What can I help you?",
+        "attachments": [ {
+            "title": "ThomsonReuters Beijing Operation Center Innovation Lab",
+            "title_link": "https://www.thomsonreuters.cn",
+            "color": "#f49e42",
+            "thumb_url": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg"
+        }]
+    }
+}
 
 function tr(){
     return {
