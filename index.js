@@ -27,11 +27,11 @@ restService.post('/slack-test', function(req, res) {
     
     var slack_message = "This is ThomsonReuters Beijing Operation Center Innovation Lab, What can I help you?";
     
-    if(req.body.result && req.body.result.parameters && req.body.result.parameters.TR)
-        slack_message =  tr();
+  #  if(req.body.result && req.body.result.parameters && req.body.result.parameters.TR)
+  #      slack_message =  tr();
     
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ)
-        slack_massage = bimbqm();   
+  #  if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ)
+  #      slack_massage = bimbqm();   
     
     return res.json({
         speech: "speech",
