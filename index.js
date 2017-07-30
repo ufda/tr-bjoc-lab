@@ -25,10 +25,10 @@ restService.post('/slack-test', function(req, res) {
     
     var action = req.body.result.action;
     
-    var slack_message = tr();
+    var slack_message = welcome();
     
     return res.json({
-        speech: "speech",
+        speech: slack_message,
         displayText: "speech",
         source: 'webhook-echo-sample',
         data: {
@@ -36,6 +36,12 @@ restService.post('/slack-test', function(req, res) {
         }
     });
 });
+
+function welcome(){
+    return {
+        "text": "This is Thomson Reuters Beijing Operation Center, what can I help?"
+    }
+}
 
 function tr(){
     return {
