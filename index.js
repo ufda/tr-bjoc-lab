@@ -27,6 +27,13 @@ restService.post('/slack-test', function(req, res) {
     
     var slack_message = welcome();
     
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.TR) {
+        slack_message = tr();        
+    }
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
+        slack_message = bimbqm();        
+    }
+
     return res.json({
         speech: "speech",
         displayText: "speech",
@@ -42,7 +49,7 @@ function welcome(){
         "text": "What can I help you?",
         "attachments": [ {
             "title": "TR BJOC Innovation Lab",
-            "title_link": "https://www.thomsonreuters.cn",
+            "title_link": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg",
             "color": "#f49e42",
             "thumb_url": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg"
         }]
