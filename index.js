@@ -40,7 +40,7 @@ function bimbqm(){
         "text": "Details of JIRA board for Browse and Commerce",
         "attachments": [{
             "title": "JIRA Board",
-            "title_link": "http://www.google.com",
+            "title_link": "http://www.thomsonreuters.com",
             "color": "#36a64f",
 
             "fields": [{
@@ -56,7 +56,7 @@ function bimbqm(){
             "thumb_url": "https://stiltsoft.com/blog/wp-content/uploads/2016/01/5.jira_.png"
         }, {
             "title": "Story status count",
-            "title_link": "http://www.google.com",
+            "title_link": "http://www.thomsonreuters.com",
             "color": "#f49e42",
 
             "fields": [{
