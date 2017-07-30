@@ -23,7 +23,20 @@ restService.post('/echo', function(req, res) {
 
 restService.post('/slack-test', function(req, res) {
 
-    var slack_message = {
+    var slack_message = bimbqm();
+    
+    return res.json({
+        speech: "speech",
+        displayText: "speech",
+        source: 'webhook-echo-sample',
+        data: {
+            "slack": slack_message
+        }
+    });
+});
+
+function bimbqm(){
+    return {
         "text": "Details of JIRA board for Browse and Commerce",
         "attachments": [{
             "title": "JIRA Board",
@@ -65,16 +78,7 @@ restService.post('/slack-test', function(req, res) {
             }]
         }]
     }
-    return res.json({
-        speech: "speech",
-        displayText: "speech",
-        source: 'webhook-echo-sample',
-        data: {
-            "slack": slack_message
-        }
-    });
-});
-
+}
 
 
 
