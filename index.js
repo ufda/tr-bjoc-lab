@@ -33,6 +33,9 @@ restService.post('/slack-test', function(req, res) {
     if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
         slack_message = bimbqm();        
     }
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.JF) {
+        slack_message = jf();        
+    }
 
     return res.json({
         speech: "speech",
@@ -43,6 +46,18 @@ restService.post('/slack-test', function(req, res) {
         }
     });
 });
+
+function jf(){
+    return {
+        "text": "John Finch",
+        "attachments": [ {
+            "title": "Chief Technology Officer, Financial and Risk at Thomson Reuters",
+            "title_link": "https://uk.linkedin.com/in/john-finch-0a854920",
+            "color": "#f49e42",
+            "thumb_url": "https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAALhAAAAJGUzMmU1MjY4LWFkNTEtNDhmNi05YTM1LTlmZTVkZjBhNjIwOA.jpg"
+        }]
+    }
+}
 
 function welcome(){
     return {
