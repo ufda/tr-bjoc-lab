@@ -39,7 +39,13 @@ restService.post('/slack-test', function(req, res) {
 
 function welcome(){
     return {
-        "text": "This is Thomson Reuters Beijing Operation Center, what can I help?"
+        "text": "What can I help?",
+        "attachments": [ {
+            "title": "ThomsonReuters Beijing Operation Center Innovation Lab",
+            "title_link": "https://www.thomsonreuters.cn",
+            "color": "#f49e42",
+            "thumb_url": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg"
+        },{}]
     }
 }
 
