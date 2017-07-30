@@ -24,7 +24,14 @@ restService.post('/echo', function(req, res) {
 restService.post('/slack-test', function(req, res) {
     
     var action = req.body.result.action;
-    var slack_message = tr();
+    
+    var slack_message = "This is ThomsonReuters Beijing Operation Center Innovation Lab, What can I help you?";
+    
+    if(req.body.result && req.body.result.parameters && req.body.result.parameters.TR)
+        slack_message =  tr();
+    
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ)
+        slack_massage = bimbqm();   
     
     return res.json({
         speech: "speech",
@@ -42,13 +49,13 @@ function tr(){
         "attachments": [ {
             "title": "Board of Directors",
             "title_link": "https://www.thomsonreuters.com/en/about-us/board-of-directors.html",
-            "color": "#36a64f",
+            "color": "#f49e42",
             "thumb_url": "https://www.thomsonreuters.com/content/dam/openweb/images/corporate/16-9/bio-photos/david-thomson.jpg/_jcr_content/renditions/cq5dam.thumbnail.370.208.png"
         },
         {
             "title": "Executive Team",
             "title_link": "https://www.thomsonreuters.com/en/about-us/executive-team.html",
-            "color": "#36a64f",
+            "color": "#f49e42",
             "thumb_url": "https://www.thomsonreuters.com/content/dam/openweb/images/corporate/16-9/bio-photos/James-Smith.jpg/_jcr_content/renditions/cq5dam.thumbnail.370.208.png"        
         }]
     }
