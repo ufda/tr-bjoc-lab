@@ -25,7 +25,7 @@ restService.post('/slack-test', function(req, res) {
     
     var action = req.body.result.action;
     
-    var slack_message = "This is ThomsonReuters Beijing Operation Center Innovation Lab, What can I help you?";
+    var slack_message = tr();
     
     return res.json({
         speech: "speech",
