@@ -12,6 +12,8 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/hello', function(req, res) {
+    var pg = require('pg');
+    pg.defaults.ssl = true;
     return res.json({
         message: 'Hello World',
         source: 'pg_test'
