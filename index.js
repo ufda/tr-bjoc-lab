@@ -20,7 +20,7 @@ restService.get('/hello', function(req, res) {
     client.connect();
     my_message = "Connected!";
     
-    var query  = client.query('SELECT NOW() AS "theTime"');
+    var query  = client.query('select * from test');
     query.on('end', function() {
         client.end();
     });
