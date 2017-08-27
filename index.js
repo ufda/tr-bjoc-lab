@@ -31,12 +31,13 @@ restService.get('/hello', function(req, res) {
                         source: 'pg_test'
                     });
                 }
+                return res.json({
+                    message: result.rows[0].theTime,
+                    source: 'pg_test'
+                });
+                
               });
 
-            return res.json({
-                message: 'DONE',
-                source: 'pg_test'
-            });
         }
     });
     
