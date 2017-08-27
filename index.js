@@ -18,13 +18,13 @@ restService.get('/hello', function(req, res) {
     var conString = process.env.DATABASE_URL;;       
     var client = new pg.Client(conString);
     
-    client.connect(function(err) {
+    my_message = client.connect(function(err) {
         if(err) { 
             my_message = 'connection errors!';
         }else {
             my_message = 'completed';
         }
-        return;
+        return 'done';
     });
     
     return res.json({
