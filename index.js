@@ -17,8 +17,8 @@ restService.get('/hello', function(req, res) {
     var my_message = "running query";
     var conString = "postgres://nlmiijucugmkgy:ecee66c60fdf4553ad10261ff5fa2d0bb65858f2a623be3559d73ad938f534d1@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d8hm6a03dul7uh";       
     var client = new pg.Client(conString);
-    my_message = "Connected!";
     client.connect(function(err) {
+        my_message = "Connected!";
         if(err) {
             my_message = "could not connect to postgres";
         }
