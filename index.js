@@ -20,7 +20,8 @@ restService.get('/hello', function(req, res) {
     client.connect();
     my_message = "Connected!";
     
-    var query  = client.query('select * from test');
+    var query  = client.query('select * from test;');
+    query.on('row', function(row) { console.log(JSON.stringify(row)); } );
     my_message ="query compelted!";
     return res.json({
         message: my_message,
