@@ -12,7 +12,10 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/hello', function(req, res) {
-    return 'Hello World';
+    return res.json({
+        message: 'Hello World',
+        source: 'pg_test'
+    });
 });
 
 restService.post('/echo', function(req, res) {
