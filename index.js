@@ -134,6 +134,21 @@ function bimbqm(){
     }
 }
 
+function pg_connect(){
+    var pg = require('pg');
+    pg.defaults.ssl = true;
+    
+    var connectionString = "postgres://*USERNAME*:*PASSWORD*@*HOST*:*PORT:/*DATABASE*"
+
+    pg.connect(connectionString, function(err, client, done) {
+        client.query('SELECT * FROM your_table', function(err, result) {
+            done();
+            if(err) return console.error(err);
+            console.log(result.rows);
+        });
+    });
+    return 'OK';
+}
 
 
 restService.listen((process.env.PORT || 8000), function() {
