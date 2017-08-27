@@ -21,9 +21,7 @@ restService.get('/hello', function(req, res) {
     my_message = "Connected!";
     
     var query  = client.query('SELECT NOW() AS "theTime"');
-    query.on('row', function(row){ my_message = "executing query";});
-    query.on('end', function(){ my_message = "query compeleted"; client.end();});
-    
+    my_message ="query compelted!";
     return res.json({
         message: my_message,
         source: 'pg_test'
