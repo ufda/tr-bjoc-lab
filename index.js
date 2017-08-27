@@ -18,19 +18,20 @@ restService.get('/hello', function(req, res) {
     var conString = process.env.DATABASE_URL;;       
     var client = new pg.Client(conString);
     
-    my_message = client.connect(function(err) {
+    client.connect(function(err) {
         if(err) { 
-            my_message = 'connection errors!';
+            return res.json({
+                message: 'ERROR:'+err,
+                source: 'pg_test'
+            });
         }else {
-            my_message = 'completed';
+            return res.json({
+                message: 'DONE',
+                source: 'pg_test'
+            });
         }
-        return 'done';
     });
     
-    return res.json({
-        message: my_message,
-        source: 'pg_test'
-    });
 });
 
 restService.post('/echo', function(req, res) {
