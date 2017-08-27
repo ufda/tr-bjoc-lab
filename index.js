@@ -14,7 +14,6 @@ restService.use(bodyParser.json());
 restService.get('/hello', function(req, res) {
     var pg = require('pg');
     pg.defaults.ssl = true;
-    var my_message = "running query";
     var conString = process.env.DATABASE_URL;;       
     var client = new pg.Client(conString);
     
@@ -25,6 +24,15 @@ restService.get('/hello', function(req, res) {
                 source: 'pg_test'
             });
         }else {
+              client.query('SELECT NOW() AS "theTime"', function(err, result) {
+                if(err) {
+                    return res.json({
+                        message: 'ERROR IN RUNNING QUERY',
+                        source: 'pg_test'
+                    });
+                }
+              });
+
             return res.json({
                 message: 'DONE',
                 source: 'pg_test'
