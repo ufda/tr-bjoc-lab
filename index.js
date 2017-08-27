@@ -16,17 +16,20 @@ restService.get('/hello', function(req, res) {
     pg.defaults.ssl = true;
     var my_message = "running query";
     var conString = "postgres://nlmiijucugmkgy:ecee66c60fdf4553ad10261ff5fa2d0bb65858f2a623be3559d73ad938f534d1@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d8hm6a03dul7uh";       
-    pg.connect(conString, function(err, client) {
-      if (err) throw err;
-      console.log('Connected to postgres! Getting schemas...');
-
-      client
-        .query('SELECT NOW();')
-        .on('row', function(row) {
-          my_message = JSON.stringify(row); 
-          console.log(my_message);
+    var client = new pg.Client(conString);
+    my_message = "Connected!";
+    client.connect(function(err) {
+        if(err) {
+            my_message = "could not connect to postgres";
+        }
+        client.query('SELECT NOW() AS "theTime"', function(err, result) {
+            if(err) {
+                my_message = "error running query";
+            }
+            my_message = result.rows[0].theTime;
         });
-    });    
+    });
+
     return res.json({
         message: my_message,
         source: 'pg_test'
