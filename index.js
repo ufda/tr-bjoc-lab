@@ -17,19 +17,16 @@ restService.get('/hello', function(req, res) {
     var my_message = "running query";
     var conString = process.env.DATABASE_URL;;       
     var client = new pg.Client(conString);
-    my_messange = client.connect( function(err) {
+    
+    client.connect(function(err) {
         if(err) { 
-            return 'connection errors!';
+            my_message = 'connection errors!';
+        }else {
+            my_message = 'completed';
         }
-        client.query('SELECT NOW() AS "theTime"', function(err, result) {
-            if(err) {
-                return 'fail to run query';
-            }
-            return 'completed';
-            //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
-            client.end();
-        });
-    });    
+        return;
+    });
+    
     return res.json({
         message: my_message,
         source: 'pg_test'
