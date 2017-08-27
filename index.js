@@ -25,7 +25,7 @@ restService.get('/hello', function(req, res) {
             if(err) {
                 return 'fail to run query';
             }
-            return 'completed;
+            return 'completed';
             //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
             client.end();
         });
