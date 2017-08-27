@@ -21,8 +21,7 @@ restService.get('/hello', function(req, res) {
     my_message = "Connected!";
     
     var query  = client.query('select * from test;');
-    query.on('row', function(row) { console.log(JSON.stringify(row)); } );
-    my_message ="query compelted!";
+    my_message = process.env.DATABASE_URL;
     return res.json({
         message: my_message,
         source: 'pg_test'
