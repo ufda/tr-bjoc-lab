@@ -15,13 +15,15 @@ restService.get('/hello', function(req, res) {
     var pg = require('pg');
     pg.defaults.ssl = true;
     var my_message = "running query";
-    var conString = "pg://nlmiijucugmkgy:ecee66c60fdf4553ad10261ff5fa2d0bb65858f2a623be3559d73ad938f534d1@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d8hm6a03dul7uh";       
+    var conString = process.env.DATABASE_URL;;       
     var client = new pg.Client(conString);
     client.connect();
     my_message = "Connected!";
     
     var query  = client.query('select * from test;');
-    my_message = process.env.DATABASE_URL;
+    
+    my_message = "Completed!";
+    
     return res.json({
         message: my_message,
         source: 'pg_test'
