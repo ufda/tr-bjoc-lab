@@ -28,7 +28,8 @@ restService.post('/slack-test', function(req, res) {
     var slack_message = welcome();
     
     if (req.body.result && req.body.result.parameters && req.body.result.parameters.TR) {
-        slack_message = tr();        
+        #slack_message = tr();
+        slack_message = pg_conntect();
     }
     if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
         slack_message = bimbqm();        
@@ -137,17 +138,29 @@ function bimbqm(){
 function pg_connect(){
     var pg = require('pg');
     pg.defaults.ssl = true;
-    
-    var connectionString = "postgres://*USERNAME*:*PASSWORD*@*HOST*:*PORT:/*DATABASE*"
-
-    pg.connect(connectionString, function(err, client, done) {
-        client.query('SELECT * FROM your_table', function(err, result) {
-            done();
-            if(err) return console.error(err);
-            console.log(result.rows);
+    var conString = "postgres://nlmiijucugmkgy:ecee66c60fdf4553ad10261ff5fa2d0bb65858f2a623be3559d73ad938f534d1@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d8hm6a03dul7uh"
+    var client = new pg.Client(conString);
+    var message = "Connected!";
+    client.connect(function(err) {
+        if(err) {
+            console.error('could not connect to postgres', err);
+            message = "could not connect to postgres";
+        }
+        client.query('SELECT NOW() AS "theTime"', function(err, result) {
+            if(err) {
+                console.error('error running query', err);
+                message = "error running query";
+            }
+            console.log(result.rows[0].theTime);
+            message = result.rows[0].theTime;
+            //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
+            client.end();
         });
     });
-    return 'OK';
+    return {
+        "text": message,
+        "attachements": [{'',''}]
+    };
 }
 
 
