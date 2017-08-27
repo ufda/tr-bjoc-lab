@@ -143,8 +143,8 @@ function bimbqm(){
 }
 
 function pg_connect(){
-    var pg = require('pg');
-    pg.defaults.ssl = true;
+    #var pg = require('pg');
+    #pg.defaults.ssl = true;
     var conString = "postgres://nlmiijucugmkgy:ecee66c60fdf4553ad10261ff5fa2d0bb65858f2a623be3559d73ad938f534d1@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d8hm6a03dul7uh";
     return conString;
 }
