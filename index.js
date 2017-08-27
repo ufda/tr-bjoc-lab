@@ -28,8 +28,7 @@ restService.post('/slack-test', function(req, res) {
     var slack_message = welcome();
     
     if (req.body.result && req.body.result.parameters && req.body.result.parameters.TR) {
-        #slack_message = tr();
-        slack_message = pg_conntect();
+        slack_message = tr();
     }
     if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
         slack_message = bimbqm();        
