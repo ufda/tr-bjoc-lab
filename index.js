@@ -17,19 +17,13 @@ restService.get('/hello', function(req, res) {
     var my_message = "running query";
     var conString = "postgres://nlmiijucugmkgy:ecee66c60fdf4553ad10261ff5fa2d0bb65858f2a623be3559d73ad938f534d1@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d8hm6a03dul7uh";       
     var client = new pg.Client(conString);
-    client.connect(function(err) {
-        my_message = "Connected!";
-        if(err) {
-            my_message = "could not connect to postgres";
-        }
-        client.query('SELECT NOW() AS "theTime"', function(err, result) {
-            if(err) {
-                my_message = "error running query";
-            }
-            my_message = result.rows[0].theTime;
-        });
-    });
-
+    client.connect();
+    my_message = "Connected!";
+    
+    var query  = client.query('SELECT NOW() AS "theTime"');
+    query.on('row', function(row){ my_message = "executing query";});
+    query.on('end', function(row){ my_message = "query compeleted"; client.end();});
+    
     return res.json({
         message: my_message,
         source: 'pg_test'
