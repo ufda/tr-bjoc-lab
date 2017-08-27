@@ -22,7 +22,7 @@ restService.get('/hello', function(req, res) {
     
     var query  = client.query('SELECT NOW() AS "theTime"');
     query.on('row', function(row){ my_message = "executing query";});
-    query.on('end', function(row){ my_message = "query compeleted"; client.end();});
+    query.on('end', function(){ my_message = "query compeleted"; client.end();});
     
     return res.json({
         message: my_message,
