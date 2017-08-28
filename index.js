@@ -24,7 +24,7 @@ restService.get('/hello', function(req, res) {
                 source: 'pg_test'
             });
         }else {
-              client.query('SELECT F1 AS "theTime" FROM TEST', function(err, result) {
+              client.query('SELECT F2 AS "theTime" FROM TEST', function(err, result) {
                 if(err) {
                     return res.json({
                         message: 'ERROR IN RUNNING QUERY',
