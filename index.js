@@ -90,7 +90,7 @@ app.post('/slack-eiw', function(req, res) {
     
     var slack_message = welcome();
     return res.json({
-        speech: "speech",
+        speech: req.body.result,
         displayText: "speech",
         source: 'webhook-echo-sample',
         data: {
