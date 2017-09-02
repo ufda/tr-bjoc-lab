@@ -29,6 +29,7 @@ function q_people(req, res){
         var people = {};
         var err = {}; 
         var _name = req.body.result.parameters.JF;
+        if( !_name ) { _name = req.body.result.parameters.given-name; };
         
         client.connect(function(err) {
                        if(err) {
