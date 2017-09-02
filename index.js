@@ -43,7 +43,7 @@ restService.get('/hello', function(req, res) {
     
 });
 
-restService.get('/echo', function(req, res) {
+restService.post('/echo', function(req, res) {
     var speech =  "ZZS: Seems like some problem. Speak again."
     return res.json({
         speech: speech,
