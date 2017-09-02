@@ -90,24 +90,7 @@ app.post('/slack-eiw', function(req, res) {
     
     var slack_message = welcome();
     
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.TR) {
-        slack_message = tr();
-    }
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
-        slack_message = bimbqm();        
-    }
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.JF) {
-        slack_message = jf();        
-    }
-
-    return res.json({
-        speech: "speech",
-        displayText: "speech",
-        source: 'webhook-echo-sample',
-        data: {
-            "slack": slack_message
-        }
-    });
+    return res.json(req.body.result);
 });
 
 app.post('/slack-test', function(req, res) {
