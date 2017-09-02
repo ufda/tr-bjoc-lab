@@ -28,7 +28,7 @@ function q_people(req, res){
         var client = get_pg_client();    
         var people = {};
         var err = {}; 
-        var _name = req.body.result.parameters.given-name;
+        var _name = req.body.result.parameters.JF;
         
         client.connect(function(err) {
                        if(err) {
@@ -94,7 +94,8 @@ app.post('/slack-eiw', function(req, res) {
     
     if ( action && action == 'q_people'){
         smsg = req.body.result.parameters.JF;
-    }
+        q_people(req,res);   
+    }else {
                           return res.json({
                             speech: "ZZ:"+smsg,
                             displayText: "speech",
@@ -103,6 +104,7 @@ app.post('/slack-eiw', function(req, res) {
                                 "slack": slack_message
                             }
                           });
+    }
 });
 
 app.post('/slack-test', function(req, res) {
