@@ -1,5 +1,14 @@
 'use strict';
 
+function get_pg_client(){
+    var pg = require('pg');
+    pg.defaults.ssl = true;
+    var conString = process.env.DATABASE_URL;
+    return new pg.Client(conString);
+    
+};
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -13,9 +22,7 @@ restService.use(bodyParser.json());
 
 restService.get('/hello', function(req, res) {
     var pg = require('pg');
-    pg.defaults.ssl = true;
-    var conString = process.env.DATABASE_URL;;       
-    var client = new pg.Client(conString);
+    var client = get_pg_client();
     
     client.connect(function(err) {
         if(err) { 
