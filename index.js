@@ -87,18 +87,7 @@ app.post('/echo', function(req, res) {
 app.post('/slack-eiw', function(req, res){
     var action = req.body.result.action;
     var slack_message = welcome();
-    if (action && action == 'q_people'){
-        res.json(req.body.result);
-    }else{
-      return res.json({
-          speech: "speech",
-          displayText: "speech",
-          source: 'webhook-echo-sample',
-          data: {
-              "slack": slack_message
-          }
-      });
-    }
+    res.json(slack_message);
 });
 
 
