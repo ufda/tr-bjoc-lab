@@ -25,11 +25,9 @@ app.get('/', function (req, res) {
 app.get('/people', function(req,res) { q_people(req,res);});
 
 function q_people(req, res){
-        var client = get_pg_client();
-        
+        var client = get_pg_client();    
         var people = {};
-        var err = {};
-        
+        var err = {}; 
         var _name = req.query.name;
         
         client.connect(function(err) {
@@ -46,17 +44,28 @@ function q_people(req, res){
                      if(err) {
                         return res.json(err);
                      }else {
-                     if(result.rowCount > 0) {
-                        people.full_name = result.rows[0].full_name;
-                        people.title = result.rows[0].title;
-                        people.title_link = result.rows[0].title_link;
-                        people.color = result.rows[0].color;
-                        people.thumb_url = result.rows[0].thumb_url;
-                        return res.json(people);
-                     };
-                      return res.json(people);
+                       if(result.rowCount > 0) {
+                          people.full_name = result.rows[0].full_name;
+                          people.title = result.rows[0].title;
+                          people.title_link = result.rows[0].title_link;
+                          people.color = result.rows[0].color;
+                          people.thumb_url = result.rows[0].thumb_url;
+                          var slack_message =
+                            { "text": people.full_name,
+                              "attachments": [ {
+                                              "title": people.title,
+                                              "title_link": people.title_link,
+                                              "color": people.color,
+                                              "thumb_url": people.thumb_url
+                             }]
+                            };
+
+                          return res.json(slack_message);
+                       }else{
+                         return res.json({});
+                       };
                      }
-                     });
+        });
         
 };
 
@@ -72,6 +81,9 @@ app.post('/echo', function(req, res) {
 app.post('/slack-eiw', function(req, res){
     var action = req.body.result.action;
     var slack_message = welcome();
+    if (action && action == 'q_people'){
+        
+    }
 });
 
 
