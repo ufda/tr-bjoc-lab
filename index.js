@@ -28,7 +28,7 @@ function q_people(req, res){
         var client = get_pg_client();    
         var people = {};
         var err = {}; 
-        var _name = req.query.name;
+        var _name = req.body.result.parameters.given-name;
         
         client.connect(function(err) {
                        if(err) {
@@ -59,8 +59,14 @@ function q_people(req, res){
                                               "thumb_url": people.thumb_url
                              }]
                             };
-
-                          return res.json(slack_message);
+                          return res.json({
+                            speech: "speech",
+                            displayText: "speech",
+                            source: 'webhook-echo-sample',
+                            data: {
+                                "slack": slack_message
+                            }
+                          });
                        }else{
                          return res.json({});
                        };
@@ -82,7 +88,16 @@ app.post('/slack-eiw', function(req, res){
     var action = req.body.result.action;
     var slack_message = welcome();
     if (action && action == 'q_people'){
-        
+        q_people(req,res);
+    }else{
+      return res.json({
+          speech: "speech",
+          displayText: "speech",
+          source: 'webhook-echo-sample',
+          data: {
+              "slack": slack_message
+          }
+      });
     }
 });
 
