@@ -23,32 +23,43 @@ app.get('/', function (req, res) {
         });
 
 app.get('/people', function(req,res){
-
-    var q_name = req.query.name;
-    var people = {};
-    var client = get_pg_client();        
-    client.connect(function(err) {
+        var client = get_pg_client();
+        
+        var people = {};
+        var err = {};
+        
+        var _name = req.query.name;
+        
+        client.connect(function(err) {
                        if(err) {
                         console.log(err);
+                        res.json(err)
+                       }
+                       
+                       });
+        
+        console.log("DB connected~~!")
+        
+        client.query('SELECT * FROM PEOPLE where full_name like \'%'+_name+'%\'', function(err, result) {
+                     if(err) {
                         return res.json(err);
-                       }   
-                 });
-                
-    client.query('SELECT * FROM PEOPLE where full_name like \'%'+q_name+'%\'', function(err, result) {
-                   if(err) {
-                        return res.json(err);
-                   }else {
+                     }else {
                      if(result.rowCount > 0) {
                         people.full_name = result.rows[0].full_name;
                         people.title = result.rows[0].title;
                         people.title_link = result.rows[0].title_link;
                         people.color = result.rows[0].color;
                         people.thumb_url = result.rows[0].thumb_url;
-                        return res.json(people)
+                        return res.json(people);
                      };
-                   }
-                });
-});
+                      return res.json(people);
+                     }
+                     });
+        
+        });
+
+
+
 
 app.post('/echo', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
