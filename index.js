@@ -18,7 +18,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.get('/', function(req, res) { res.send('Hello World~!'); });
+app.get('/', function (req, res) {
+        res.send('Hello World!');
+        });
+
 
 app.get('/people', function(req,res){
         var client = get_pg_client();        
