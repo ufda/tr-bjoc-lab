@@ -8,49 +8,53 @@ function get_pg_client(){
     
 };
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
+const app = express();
 
-const restService = express();
-
-restService.use(bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-restService.use(bodyParser.json());
+app.use(bodyParser.json());
 
-restService.get('/hello', function(req, res) {
-    var pg = require('pg');
-    var client = get_pg_client();
-    
-    client.connect(function(err) {
-        if(err) { 
-            return res.json({
-                message: 'ERROR:'+err,
-                source: 'pg_test'
-            });
-        }else {
-              client.query('SELECT F2 AS "theTime" FROM TEST', function(err, result) {
-                if(err) {
-                    return res.json({
-                        message: 'ERROR IN RUNNING QUERY',
-                        source: 'pg_test'
-                    });
-                }
-                return res.json({
-                    message: result.rows[0].theTime,
-                    source: 'pg_test'
-                });
-                
-              });
+app.get('/', function(req, res) { res.send('Hello World~!'); });
 
-        }
-    });
-    
-});
+app.get('/people', function(req,res){
+        var client = get_pg_client();        
+        var people = {};
+        var err = {};        
+        var q_name = req.query.name;
+        
+        client.connect(function(err) {
+                       if(err) {
+                        console.log(err);
+                        res.json(err)
+                       }
+                       
+                       });
+        
+        console.log("DB connected~~!")
+        
+        client.query('SELECT * FROM PEOPLE where full_name like \'%'+q_name+'%\'', function(err, result) {
+                     if(err) {
+                        return res.json(err);
+                     }else {
+                     if(result.rowCount > 0) {
+                        people.full_name = result.rows[0].full_name;
+                        people.title = result.rows[0].title;
+                        people.title_link = result.rows[0].title_link;
+                        people.color = result.rows[0].color;
+                        people.thumb_url = result.rows[0].thumb_url;
+                        return res.json(people);
+                     };
+                      return res.json(people);
+                     }
+                     });
+        
+        });
 
-restService.post('/echo', function(req, res) {
+app.post('/echo', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
     return res.json({
         speech: speech,
@@ -60,7 +64,7 @@ restService.post('/echo', function(req, res) {
 });
 
 
-restService.post('/slack-test', function(req, res) {
+app.post('/slack-test', function(req, res) {
     
     var action = req.body.result.action;
     
