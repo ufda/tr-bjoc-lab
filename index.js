@@ -28,7 +28,7 @@ function q_people(req, res){
         var client = get_pg_client();    
         var people = {};
         var err = {}; 
-        var _name = req.body.result.parameters.given-name;
+        var _name = req.query.name;
         
         client.connect(function(err) {
                        if(err) {
