@@ -95,7 +95,7 @@ app.post('/slack-eiw', function(req, res) {
     if ( action && action == 'q_people'){
         smsg = req.body.result;
     }
-    return res.json(req.body.result);
+    return res.json({tttttttttt: req.body.result});
 });
 
 app.post('/slack-test', function(req, res) {
