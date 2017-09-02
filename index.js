@@ -96,12 +96,8 @@ app.post('/slack-eiw', function(req, res) {
         smsg = req.body.result.parameters.TR;
     }
     return res.json({
-        speech: smsg,
-        displayText: "speech",
-        source: 'webhook-echo-sample',
-        data: {
-            "slack": slack_message
-        }
+        speech: "SSS:"+smsg,
+        displayText: "ZhuZansong"
     });
 });
 
