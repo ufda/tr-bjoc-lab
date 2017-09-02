@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
 function q_people_by_name(name) {
     var q_name = name;
     var people = {};
-    client = get_pg_client();
+    var client = get_pg_client();
     client.connect(function(err) {
                        if(err) {
                         console.log(err);
