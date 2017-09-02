@@ -23,11 +23,8 @@ app.get('/', function (req, res) {
         });
 
 app.get('/people', function(req,res){
-        var client = get_pg_client();
-        
-        var people = {};
-        var err = {};
-        
+        var client = get_pg_client();        
+        var people = {};        
         var _name = req.query.name;
         
         client.connect(function(err) {
@@ -35,7 +32,6 @@ app.get('/people', function(req,res){
                         console.log(err);
                         res.json(err)
                        }
-                       
                        });
         
         console.log("DB connected~~!")
@@ -55,11 +51,7 @@ app.get('/people', function(req,res){
                       return res.json(people);
                      }
                      });
-        
-        });
-
-
-
+});
 
 app.post('/echo', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
