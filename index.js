@@ -22,39 +22,40 @@ app.get('/', function (req, res) {
         res.send('Hello World!');
         });
 
-
-app.get('/people', function(req,res){
-        var client = get_pg_client();        
-        var people = {};
-        var err = {};        
-        var q_name = req.query.name;
-        
-        client.connect(function(err) {
+function q_people_by_name(name) {
+    var q_name = name;
+    var people = {};
+    client = get_pg_client();
+    client.connect(function(err) {
                        if(err) {
                         console.log(err);
-                        res.json(err)
-                       }
-                       
-                       });
-        
-        console.log("DB connected~~!")
-        
-        client.query('SELECT * FROM PEOPLE where full_name like \'%'+q_name+'%\'', function(err, result) {
-                     if(err) {
-                        return res.json(err);
-                     }else {
+                        return err;
+                       }   
+                 });
+                
+    client.query('SELECT * FROM PEOPLE where full_name like \'%'+q_name+'%\'', function(err, result) {
+                   if(err) {
+                        return err;
+                   }else {
                      if(result.rowCount > 0) {
                         people.full_name = result.rows[0].full_name;
                         people.title = result.rows[0].title;
                         people.title_link = result.rows[0].title_link;
                         people.color = result.rows[0].color;
                         people.thumb_url = result.rows[0].thumb_url;
-                        return res.json(people);
                      };
-                      return res.json(people);
-                     }
-                     });
-        
+                   }
+                });
+    return people;
+}
+
+app.get('/people', function(req,res){
+
+        var client = get_pg_client();        
+        var people = {};
+        var err = {};        
+        var q_name = req.query.name;
+        res.json(q_people_by_name(q_name));
         });
 
 app.post('/echo', function(req, res) {
@@ -64,6 +65,11 @@ app.post('/echo', function(req, res) {
         displayText: speech,
         source: 'webhook-echo-sample'
     });
+});
+
+app.post('/slack-eiw', function(req, res){
+    var action = req.body.result.action;
+    var slack_message = welcome();
 });
 
 
