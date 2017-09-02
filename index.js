@@ -76,7 +76,7 @@ function q_people(req, res){
 };
 
 app.post('/echo', function(req, res) {
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
+    var speech = ody.req.bresult && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
     return res.json({
         speech: speech,
         displayText: speech,
@@ -88,7 +88,7 @@ app.post('/slack-eiw', function(req, res){
     var action = req.body.result.action;
     var slack_message = welcome();
     if (action && action == 'q_people'){
-        q_people(req,res);
+        res.json(req.body.result);
     }else{
       return res.json({
           speech: "speech",
