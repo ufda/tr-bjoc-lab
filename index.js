@@ -93,7 +93,7 @@ app.post('/slack-eiw', function(req, res) {
     var smsg = 'other message';
     
     if ( action && action == 'q_people'){
-        smsg = 'query people';
+        smsg = req.body.result.parameters.given-name;
     }
     return res.json({
         speech: smsg,
