@@ -28,8 +28,10 @@ function q_people(req, res){
         var client = get_pg_client();    
         var people = {};
         var err = {}; 
-        var _name = req.body.result.parameters.JF;
-        if( !_name ) { _name = req.body.result.parameters.given-name; };
+        var _name = "";
+        if (req.body.result.parameters.JF){
+            _name = req.body.result.parameters.JF;
+        }else{ _name = req.body.result.parameters.given-name; };
         
         client.connect(function(err) {
                        if(err) {
