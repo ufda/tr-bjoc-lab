@@ -22,7 +22,9 @@ app.get('/', function (req, res) {
         res.send('Hello World!');
         });
 
-app.get('/people', function(req,res){
+app.get('/people', function(req, res) { q_people (req, res); });
+
+function q_people(req, res){
         var client = get_pg_client();        
         var people = {};        
         var _name = req.query.name;
