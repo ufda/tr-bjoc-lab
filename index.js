@@ -44,13 +44,14 @@ restService.get('/hello', function(req, res) {
 });
 
 restService.post('/echo', function(req, res) {
-    var speech =  "ZZS: Seems like some problem. Speak again."
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
     return res.json({
         speech: speech,
         displayText: speech,
         source: 'webhook-echo-sample'
     });
 });
+
 
 restService.post('/slack-test', function(req, res) {
     
