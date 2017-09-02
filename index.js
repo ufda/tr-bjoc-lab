@@ -95,10 +95,7 @@ app.post('/slack-eiw', function(req, res) {
     if ( action && action == 'q_people'){
         smsg = req.body.result;
     }
-    return res.json({
-        speech: "SSS:"+smsg,
-        displayText: "ZhuZansong"
-    });
+    return res.json(req.body.result);
 });
 
 app.post('/slack-test', function(req, res) {
