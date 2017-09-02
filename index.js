@@ -84,9 +84,22 @@ app.post('/echo', function(req, res) {
     });
 });
 
-app.post('/slack-eiw', function(req, res){
+app.post('/slack-eiw', function(req, res) {
+    
     var action = req.body.result.action;
+    
     var slack_message = welcome();
+    
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.TR) {
+        slack_message = tr();
+    }
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
+        slack_message = bimbqm();        
+    }
+    if (req.body.result && req.body.result.parameters && req.body.result.parameters.JF) {
+        slack_message = jf();        
+    }
+
     return res.json({
         speech: "speech",
         displayText: "speech",
@@ -96,7 +109,6 @@ app.post('/slack-eiw', function(req, res){
         }
     });
 });
-
 
 app.post('/slack-test', function(req, res) {
     
