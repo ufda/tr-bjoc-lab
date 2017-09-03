@@ -45,7 +45,7 @@ app.post('/slack-eiw', function(req, res) {
     }else if ( action && action == 'q_company'&&req.body.result.parameters.Company){
         q_company(req,res);
     }else if ( action && action == 'q_project'&&req.body.result.parameters.Project){
-        ;
+        q_project(req,res);
     }else {
         return res.json({
           speech: "ZZS",
@@ -58,6 +58,18 @@ app.post('/slack-eiw', function(req, res) {
     }
 });
 
+//Demo purpose hardcoded, not save in DB
+function q_project (req, res){
+        var slack_message = bimbqm();
+        return res.json({
+          speech: "ZZS",
+          displayText: "speech",
+          source: 'webhook-echo-sample',
+          data: {
+              "slack": slack_message
+          }
+        });
+}
 
 //Search company from database
 function q_company(req, res){
