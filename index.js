@@ -24,6 +24,12 @@ app.get('/', function (req, res) {
 
 app.get('/people', function(req,res) { q_people(req,res);});
 
+function q_compay(req, res) {
+    var people = {} ;
+    people.name = 'Zansong'
+    return res.json(people);
+}
+
 function q_people(req, res){
         var client = get_pg_client();    
         var people = {};
