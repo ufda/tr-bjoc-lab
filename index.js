@@ -24,11 +24,65 @@ app.get('/', function (req, res) {
 
 app.get('/people', function(req,res) { q_people(req,res);});
 
-function q_compay(req, res) {
-    var people = {} ;
-    people.name = 'Zansong'
-    return res.json(people);
+app.get('/company', function(req,res) { q_compay(req,res);});
+
+function q_company(req, res){
+    var client = get_pg_client();
+    var people = {};
+    var err = {};
+    var _name = req.query.name;
+    
+    client.connect(function(err) {
+                if(err) {
+                    console.log(err);
+                    res.json(err);
+                }
+                   
+    });
+    
+    console.log("DB connected~~!")
+    
+    client.query('SELECT * FROM company where full_name like \'%'+_name+'%\'', 
+        function(err, result) {
+            if(err) {
+                 return res.json(err);
+            }else {
+                if(result.rowCount > 0) {
+                    var slack_message = company_to_json(result);
+                        return res.json({
+                            speech: "speech",
+                            displayText: "speech",
+                            source: 'webhook-echo-sample',
+                            data: {
+                                 "slack": slack_message
+                            }
+                        });
+                }else{
+                    return res.json({});
+                 };
+            }
+        });
+    
+};
+
+function company_to_json(result){
+    return {
+        "text": result.rows[0].logo,
+        "attachments": [ {
+            "title": result.rows[0].title1,
+            "title_link": result.rows[0].title_link1,
+            "color": result.rows[0].color1,
+            "thumb_url": result.rows[0].thumb_url1
+        },
+        {
+            "title": result.rows[0].title2,
+            "title_link": result.rows[0].title_link2,
+            "color": result.rows[0].color2,
+            "thumb_url": result.rows[0].thumb_url2        
+        }]
+    }
 }
+
 
 function q_people(req, res){
         var client = get_pg_client();    
