@@ -36,11 +36,9 @@ function q_people(req, res){
     
         client.connect(function(err) {
                        if(err) {
-                        console.log(err);
-                        res.json(err)
+                        console.log(err); res.json(err);
                        }
-                       
-                       });
+         });
         
         console.log("DB connected~~!")
         
@@ -93,15 +91,24 @@ app.post('/slack-eiw', function(req, res) {
     
     if ( action && action == 'q_people'&&req.body.result.parameters.Name){
         q_people(req,res);   
+    }else if ( action && action == 'q_company'&&req.body.result.parameters.Company){
+        return res.json({
+          speech: "Company",
+          displayText: "speech",
+          source: 'webhook-echo-sample',
+          data: {
+              "slack": slack_message
+          }
+        });
     }else {
-                          return res.json({
-                            speech: "ZZs",
-                            displayText: "speech",
-                            source: 'webhook-echo-sample',
-                            data: {
-                                "slack": slack_message
-                            }
-                          });
+        return res.json({
+          speech: "ZZs",
+          displayText: "speech",
+          source: 'webhook-echo-sample',
+          data: {
+              "slack": slack_message
+          }
+        });
     }
 });
 
