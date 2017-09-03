@@ -1,13 +1,5 @@
 'use strict';
 
-function get_pg_client(){
-    var pg = require('pg');
-    pg.defaults.ssl = true;
-    var conString = process.env.DATABASE_URL;
-    return new pg.Client(conString);
-    
-};
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -240,6 +232,15 @@ function bimbqm(){
         }]
     }
 }
+
+
+function get_pg_client(){
+    var pg = require('pg');
+    pg.defaults.ssl = true;
+    var conString = process.env.DATABASE_URL;
+    return new pg.Client(conString);
+    
+};
 
 //Start web server
 app.listen((process.env.PORT || 8000), function() {
