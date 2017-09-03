@@ -48,18 +48,13 @@ function q_people(req, res){
                         return res.json(err);
                      }else {
                        if(result.rowCount > 0) {
-                          people.full_name = result.rows[0].full_name;
-                          people.title = result.rows[0].title;
-                          people.title_link = result.rows[0].title_link;
-                          people.color = result.rows[0].color;
-                          people.thumb_url = result.rows[0].thumb_url;
                           var slack_message =
-                            { "text": people.full_name,
+                            { "text": result.rows[0].full_name,
                               "attachments": [ {
-                                              "title": people.title,
-                                              "title_link": people.title_link,
-                                              "color": people.color,
-                                              "thumb_url": people.thumb_url
+                                              "title": result.rows[0].title,
+                                              "title_link": result.rows[0].title_link,
+                                              "color": result.rows[0].color,
+                                              "thumb_url": result.rows[0].thumb_url
                              }]
                             };
                           return res.json({
