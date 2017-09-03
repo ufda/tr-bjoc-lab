@@ -28,8 +28,8 @@ function q_company(req, res){
     var client = get_pg_client();
     var people = {};
     var err = {};
-    var _name = 'ThomsonReuters';
-   
+    var _name = req.query.name;
+
     client.connect(function(err) {
                 if(err) {
                     console.log(err);
