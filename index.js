@@ -22,16 +22,16 @@ app.get('/', function (req, res) {
         res.send('Hello World!');
         });
 
-app.get('/people', function(req,res) { q_people(req,res);});
-
-app.get('/company', function(req,res) { q_compay(req,res);});
-
 function q_company(req, res){
     var client = get_pg_client();
     var people = {};
     var err = {};
-    var _name = req.query.name;
-    
+    var _name = '-';
+
+    if (req.body.result.parameters.Name){
+        _name = req.body.result.parameters.Company;
+    }
+   
     client.connect(function(err) {
                 if(err) {
                     console.log(err);
