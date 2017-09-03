@@ -21,7 +21,7 @@ app.post('/echo', function(req, res) {
     return res.json({
         speech: speech,
         displayText: speech,
-        source: 'webhook-echo-sample'
+        source: 'webhook-eiw-demo'
     });
 });
 
@@ -42,7 +42,7 @@ app.post('/slack-eiw', function(req, res) {
         return res.json({
           speech: "ZZS",
           displayText: "speech",
-          source: 'webhook-echo-sample',
+          source: 'webhook-eiw-demo',
           data: {
               "slack": slack_message
           }
@@ -56,7 +56,7 @@ function q_project (req, res){
         return res.json({
           speech: "ZZS",
           displayText: "speech",
-          source: 'webhook-echo-sample',
+          source: 'webhook-eiw-demo',
           data: {
               "slack": slack_message
           }
@@ -94,7 +94,7 @@ function q_company(req, res){
                         return res.json({
                             speech: "speech",
                             displayText: "speech",
-                            source: 'webhook-echo-sample',
+                            source: 'webhook-eiw-demo',
                             data: {
                                  "slack": slack_message
                             }
@@ -163,7 +163,7 @@ function q_people(req, res){
                           return res.json({
                             speech: "speech",
                             displayText: "speech",
-                            source: 'webhook-echo-sample',
+                            source: 'webhook-eiw-demo',
                             data: {
                                 "slack": slack_message
                             }
