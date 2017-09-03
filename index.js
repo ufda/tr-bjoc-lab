@@ -28,7 +28,7 @@ function q_company(req, res){
     var err = {};
     var _name = '-';
 
-    if (req.body.result.parameters.Name){
+    if (req.body.result.parameters.Company){
         _name = req.body.result.parameters.Company;
     }
    
