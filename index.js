@@ -18,12 +18,48 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+//Home Page
 app.get('/', function (req, res) {
         res.send('Hello World!');
         });
 
-app.get('/company', function(req, res){ q_company(req,res);});
+//Test Echo
+app.post('/echo', function(req, res) {
+    var speech = ody.req.bresult && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
+    return res.json({
+        speech: speech,
+        displayText: speech,
+        source: 'webhook-echo-sample'
+    });
+});
 
+//Demo of Chatbot
+app.post('/slack-eiw', function(req, res) {
+    
+    var action = req.body.result.action;
+    
+    var slack_message = welcome();
+        
+    if ( action && action == 'q_people'&&req.body.result.parameters.Name){
+        q_people(req,res);   
+    }else if ( action && action == 'q_company'&&req.body.result.parameters.Company){
+        q_company(req,res);
+    }else if ( action && action == 'q_project'&&req.body.result.parameters.Project){
+        ;
+    }else {
+        return res.json({
+          speech: "ZZS",
+          displayText: "speech",
+          source: 'webhook-echo-sample',
+          data: {
+              "slack": slack_message
+          }
+        });
+    }
+});
+
+
+//Search company from database
 function q_company(req, res){
     var client = get_pg_client();
     var people = {};
@@ -67,6 +103,7 @@ function q_company(req, res){
     
 };
 
+//Formating output for slack
 function company_to_json(result){
     return {
         "text": result.rows[0].logo,
@@ -86,6 +123,7 @@ function company_to_json(result){
 }
 
 
+//Select people from database
 function q_people(req, res){
         var client = get_pg_client();    
         var people = {};
@@ -134,77 +172,6 @@ function q_people(req, res){
         
 };
 
-app.post('/echo', function(req, res) {
-    var speech = ody.req.bresult && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
-    return res.json({
-        speech: speech,
-        displayText: speech,
-        source: 'webhook-echo-sample'
-    });
-});
-
-app.post('/slack-eiw', function(req, res) {
-    
-    var action = req.body.result.action;
-    
-    var slack_message = welcome();
-    
-    var smsg = 'other message';
-    
-    if ( action && action == 'q_people'&&req.body.result.parameters.Name){
-        q_people(req,res);   
-    }else if ( action && action == 'q_company'&&req.body.result.parameters.Company){
-        q_company(req,res);
-    }else {
-        return res.json({
-          speech: "ZZS",
-          displayText: "speech",
-          source: 'webhook-echo-sample',
-          data: {
-              "slack": slack_message
-          }
-        });
-    }
-});
-
-app.post('/slack-test', function(req, res) {
-    
-    var action = req.body.result.action;
-    
-    var slack_message = welcome();
-    
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.TR) {
-        slack_message = tr();
-    }
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.PRJ) {
-        slack_message = bimbqm();        
-    }
-    if (req.body.result && req.body.result.parameters && req.body.result.parameters.JF) {
-        slack_message = jf();        
-    }
-
-    return res.json({
-        speech: "speech",
-        displayText: "speech",
-        source: 'webhook-echo-sample',
-        data: {
-            "slack": slack_message
-        }
-    });
-});
-
-function jf(){
-    return {
-        "text": "John Finch",
-        "attachments": [ {
-            "title": "Chief Technology Officer, Financial and Risk at Thomson Reuters",
-            "title_link": "https://uk.linkedin.com/in/john-finch-0a854920",
-            "color": "#f49e42",
-            "thumb_url": "https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAALhAAAAJGUzMmU1MjY4LWFkNTEtNDhmNi05YTM1LTlmZTVkZjBhNjIwOA.jpg"
-        }]
-    }
-}
-
 function welcome(){
     return {
         "text": "What can I help you?",
@@ -213,24 +180,6 @@ function welcome(){
             "title_link": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg",
             "color": "#f49e42",
             "thumb_url": "https://www.thomsonreuters.cn/content/dam/openweb/images/china/artworked/Jinhui3.jpg"
-        }]
-    }
-}
-
-function tr(){
-    return {
-        "text": "The Answer Company",
-        "attachments": [ {
-            "title": "Board of Directors",
-            "title_link": "https://www.thomsonreuters.com/en/about-us/board-of-directors.html",
-            "color": "#f49e42",
-            "thumb_url": "https://www.thomsonreuters.com/content/dam/openweb/images/corporate/16-9/bio-photos/david-thomson.jpg/_jcr_content/renditions/cq5dam.thumbnail.370.208.png"
-        },
-        {
-            "title": "Executive Team",
-            "title_link": "https://www.thomsonreuters.com/en/about-us/executive-team.html",
-            "color": "#f49e42",
-            "thumb_url": "https://www.thomsonreuters.com/content/dam/openweb/images/corporate/16-9/bio-photos/James-Smith.jpg/_jcr_content/renditions/cq5dam.thumbnail.370.208.png"        
         }]
     }
 }
@@ -280,6 +229,7 @@ function bimbqm(){
     }
 }
 
+//Start web server
 app.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
