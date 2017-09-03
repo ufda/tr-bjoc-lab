@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
 
 //Test Echo
 app.post('/echo', function(req, res) {
-    var speech = req.body.req.bresult && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
+    var speech = req.body.req.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
     return res.json({
         speech: speech,
         displayText: speech,
