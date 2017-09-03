@@ -152,17 +152,10 @@ app.post('/slack-eiw', function(req, res) {
     if ( action && action == 'q_people'&&req.body.result.parameters.Name){
         q_people(req,res);   
     }else if ( action && action == 'q_company'&&req.body.result.parameters.Company){
-        return res.json({
-          speech: "Company",
-          displayText: "speech",
-          source: 'webhook-echo-sample',
-          data: {
-              "slack": slack_message
-          }
-        });
+        q_company(req,res);
     }else {
         return res.json({
-          speech: "ZZs",
+          speech: "ZZS",
           displayText: "speech",
           source: 'webhook-echo-sample',
           data: {
