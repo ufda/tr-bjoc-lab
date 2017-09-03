@@ -22,6 +22,8 @@ app.get('/', function (req, res) {
         res.send('Hello World!');
         });
 
+app.get('/company', function(req, res){ q_company(req,res);});
+
 function q_company(req, res){
     var client = get_pg_client();
     var people = {};
@@ -30,6 +32,8 @@ function q_company(req, res){
 
     if (req.body.result.parameters.Company){
         _name = req.body.result.parameters.Company;
+    }else {
+        _name = req.query.name;
     }
    
     client.connect(function(err) {
