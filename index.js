@@ -92,7 +92,7 @@ function q_company(req, res){
                 if(result.rowCount > 0) {
                     var slack_message = company_to_json(result);
                         return res.json({
-                            speech: "speech",
+                            speech: result.rows[0].logo,
                             displayText: "speech",
                             source: 'webhook-eiw-demo',
                             data: {
@@ -161,7 +161,7 @@ function q_people(req, res){
                              }]
                             };
                           return res.json({
-                            speech: "speech",
+                            speech: result.rows[0].title,
                             displayText: "speech",
                             source: 'webhook-eiw-demo',
                             data: {
