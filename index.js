@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
 app.post('/echo', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
     return res.json({
-        speech: speech,
+        speech: 'Zhu Zansong',
         displayText: speech,
         source: 'webhook-eiw-demo'
     });
