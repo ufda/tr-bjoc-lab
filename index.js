@@ -29,8 +29,8 @@ app.post('/dbcmd', function(req, res){
 
     dbh.connect(function(err) {
                 if(err) {
-                   console.log(err);
-                   res.json(err)
+                   console.log(err.message);
+                   res.send(err.message)
                 }   
     });
 
