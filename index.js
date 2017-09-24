@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 //
 
 app.get('/tool', function(req, res){
-    var html = '<form method="post" action="/dbcmd">Database CMD: <input type="text" Name="db_cmd"/><br/><input type="submit" name="submit"/></form>';
+    var html = '<form method="post" action="/dbcmd">Database CMD: <input type="text" size=100 Name="db_cmd"/><br/><input type="submit" name="submit"/></form>';
     res.send (html);
 });
 
