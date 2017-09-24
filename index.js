@@ -18,9 +18,16 @@ app.get('/', function (req, res) {
 //
 
 app.get('/tool', function(req, res){
-    var html = '<form method="post" action="/ddl"><input type="text" Name="db_operation"/><input type="submit" name="submit"> submit</form>';
+    var html = '<form method="post" action="/ddl">Database CMD: <input type="text" Name="db_cmd"/><br/><input type="submit" name="submit"/></form>';
     res.send (html);
-})
+});
+
+app.post('/ddl', function(req, res){
+
+    var db_cmd = req.body.db_cmd;
+    res.send(db_cmd);
+
+});
 //Test Echo
 app.post('/echo', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
