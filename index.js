@@ -27,7 +27,7 @@ app.post('/dbcmd', function(req, res){
     var db_cmd = req.body.db_cmd;
     var dbh = get_pg_client();
 
-    dh.connect(function(err) {
+    dbh.connect(function(err) {
                 if(err) {
                    console.log(err);
                    res.json(err)
@@ -35,7 +35,7 @@ app.post('/dbcmd', function(req, res){
     });
 
 
-    dh.query(db_cmd, function(err,result){
+    dbh.query(db_cmd, function(err,result){
         res.send(result);
     });
 
