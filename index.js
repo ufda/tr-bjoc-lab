@@ -26,7 +26,7 @@ app.post('/dbcmd', function(req, res){
 
     var db_cmd = req.body.db_cmd;
     var dbh = get_pg_client();
-    client.query(db_cmd, 
+    dbh.query(db_cmd, 
         function(err, result) {
             if(err) {
                  return res.json(err);
