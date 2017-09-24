@@ -18,14 +18,22 @@ app.get('/', function (req, res) {
 //
 
 app.get('/tool', function(req, res){
-    var html = '<form method="post" action="/ddl">Database CMD: <input type="text" Name="db_cmd"/><br/><input type="submit" name="submit"/></form>';
+    var html = '<form method="post" action="/dbcmd">Database CMD: <input type="text" Name="db_cmd"/><br/><input type="submit" name="submit"/></form>';
     res.send (html);
 });
 
-app.post('/ddl', function(req, res){
+app.post('/dbcmd', function(req, res){
 
     var db_cmd = req.body.db_cmd;
-    res.send(db_cmd);
+    var dbh = get_pg_client();
+    client.query(db_cmd, 
+        function(err, result) {
+            if(err) {
+                 return res.json(err);
+            }else {
+                res.send(result);
+            }
+        });
 
 });
 //Test Echo
