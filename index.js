@@ -26,14 +26,18 @@ app.post('/dbcmd', function(req, res){
 
     var db_cmd = req.body.db_cmd;
     var dbh = get_pg_client();
-    dbh.query(db_cmd, 
-        function(err, result) {
-            if(err) {
-                 return res.json(err);
-            }else {
-                res.send(result);
-            }
-        });
+
+    dh.connect(function(err) {
+                if(err) {
+                   console.log(err);
+                   res.json(err)
+                }   
+    });
+
+
+    dh.query(db_cmd, function(err,result){
+        res.send(result);
+    });
 
 });
 //Test Echo
