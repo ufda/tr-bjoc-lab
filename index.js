@@ -15,6 +15,12 @@ app.get('/', function (req, res) {
         res.send('Hello World!');
         });
 
+//
+
+app.get('/tool', function(req, res){
+    var html = '<form method="post" action="/ddl"><input type="text" Name="db_operation"/><input type="submit" name="submit"> submit</form>';
+    res.send (html);
+})
 //Test Echo
 app.post('/echo', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
