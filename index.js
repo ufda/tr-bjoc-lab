@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//use body
 app.use(bodyParser.json());
 
 //Home Page
