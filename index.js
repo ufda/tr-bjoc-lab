@@ -70,7 +70,7 @@ app.post('/slack-eiw', function (req, res) {
         q_project(req, res);
     } else {
         return res.json({
-            speech: "ZZS",
+            speech: "What can I help?",
             displayText: "speech",
             source: 'webhook-eiw-demo',
             data: {
