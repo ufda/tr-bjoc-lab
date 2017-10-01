@@ -34,11 +34,13 @@ app.post('/dbcmd', function (req, res) {
     dbh.connect(function (err) {
         if (err) {
             console.log(err.message);
+            dbh.end();
             res.send(err.message)
         }
     });
 
     dbh.query(db_cmd, function (err, result) {
+        dbh.end();
         res.send(result);
     });
 
