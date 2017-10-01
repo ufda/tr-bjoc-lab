@@ -126,7 +126,7 @@ function q_company(req, res) {
                     client.end()
                     return res.json({
                         speech: result.rows[0].logo,
-                        displayText: "speech",
+                        displayText:result.rows[0].logo, 
                         source: 'webhook-eiw-demo',
                         data: {
                             "slack": slack_message
@@ -201,7 +201,7 @@ function q_people(req, res) {
                 client.end();
                 return res.json({
                     speech: result.rows[0].title,
-                    displayText: "speech",
+                    displayText:result.rows[0].title, 
                     source: 'webhook-eiw-demo',
                     data: {
                         "slack": slack_message
