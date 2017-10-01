@@ -107,7 +107,7 @@ function q_company(req, res) {
     client.connect(function (err) {
         if (err) {
             console.log(err);
-            client.end();
+//            client.end();
             res.json(err);
         }
 
@@ -118,12 +118,12 @@ function q_company(req, res) {
     client.query('SELECT * FROM company where full_name like \'%' + _name + '%\'',
         function (err, result) {
             if (err) {
-                client.end();
+ //               client.end();
                 return res.json(err);
             } else {
                 if (result.rowCount > 0) {
                     var slack_message = company_to_json(result);
-                    client.end()
+ //                  client.end()
                     return res.json({
                         speech: result.rows[0].logo,
                         displayText: "speech",
@@ -133,7 +133,7 @@ function q_company(req, res) {
                         }
                     });
                 } else {
-                    client();
+//                    client.end();
                     return res.json({});
                 };
             }
@@ -176,7 +176,7 @@ function q_people(req, res) {
     client.connect(function (err) {
         if (err) {
             console.log(err);
-            client.end();
+ //           client.end();
             res.json(err);
         }
     });
@@ -185,7 +185,7 @@ function q_people(req, res) {
 
     client.query('SELECT * FROM PEOPLE where full_name like \'%' + _name + '%\'', function (err, result) {
         if (err) {
-            client.end();
+ //          client.end();
             return res.json(err);
         } else {
             if (result.rowCount > 0) {
@@ -198,7 +198,7 @@ function q_people(req, res) {
                         "thumb_url": result.rows[0].thumb_url
                     }]
                 };
-                client.end();
+//               client.end();
                 return res.json({
                     speech: result.rows[0].title,
                     displayText: "speech",
@@ -208,7 +208,7 @@ function q_people(req, res) {
                     }
                 });
             } else {
-                client.end();
+//                client.end();
                 return res.json({});
             };
         }
