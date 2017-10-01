@@ -123,7 +123,7 @@ function q_company(req, res) {
             } else {
                 if (result.rowCount > 0) {
                     var slack_message = company_to_json(result);
-                    clent.end()
+                    client.end()
                     return res.json({
                         speech: result.rows[0].logo,
                         displayText: "speech",
