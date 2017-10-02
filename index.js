@@ -51,10 +51,26 @@ app.post('/echo', function (req, res) {
     return res.json({
         speech: 'I am Zhu, you just spoke:' + speech,
         displayText: speech,
-        source: 'webhook-eiw-demo'
+        source: 'webhook-eiw-demo',
+        data: {
+            "google":google
+        }
     });
 });
 
+function google(){
+    return {
+        "basicCard": {
+            "title": "Zansong Title",
+            "formatedText": "good \n bad",
+            "image": {
+                "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
+                "accessibilityText": "Thomason Reuters Logo"
+            }
+        }
+    };
+
+}
 //Demo of Chatbot
 app.post('/slack-eiw', function (req, res) {
 
@@ -71,7 +87,7 @@ app.post('/slack-eiw', function (req, res) {
     } else {
         return res.json({
             speech: "What can I help?",
-            displayText: "speech",
+            displayText: "What can I help?", 
             source: 'webhook-eiw-demo',
             data: {
                 "slack": slack_message
@@ -85,7 +101,7 @@ function q_project(req, res) {
     var slack_message = bimbqm();
     return res.json({
         speech: "Basic Instrument Master",
-        displayText: "speech",
+        displayText: "Basic Instrument Master", 
         source: 'webhook-eiw-demo',
         data: {
             "slack": slack_message
