@@ -73,10 +73,12 @@ function google(speech){
                 {
                     "basicCard": {
                         "title": "The Answer Company!",
+                        "subtitle": "Sub The Answer Company!",
                         "formatedText": "good \n bad",
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-                            "accessibilityText": "Thomason Reuters Logo"
+                            "accessibilityText": "Thomason Reuters Logo",
+                            "width": 400
                         },
                         'buttons': [{
                             "title": "ThomsonReuters",
