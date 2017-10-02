@@ -68,7 +68,7 @@ function google(){
     return [
         {
             "simpleResponse":{
-                'textToSpeech': ''
+                'textToSpeech': 'Rich'
             }
         },
         {
