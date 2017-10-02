@@ -55,10 +55,9 @@ app.post('/echo', function (req, res) {
         source: 'webhook-eiw-demo',
         data: {
             'google': {
+                'noInputPrompts': [],
                 'richResponse':{
-                    'items': [
-                        g_msg   
-                    ]
+                    'items': g_msg
                 }
             }
         }
@@ -66,23 +65,23 @@ app.post('/echo', function (req, res) {
 });
 
 function google(){
-    return {
-        "simpleResponse":{
-            'textToSpeech': 'my simple response',
-            'ssml':'',
-            'displyText':'displaying my message'
-
+    return [
+        {
+            "simpleResponse":{
+                'textToSpeech': 'my simple response'
+            }
         },
-        "basicCard": {
-            "title": "Zansong Title",
-            "formatedText": "good \n bad",
-            "image": {
-                "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-                "accessibilityText": "Thomason Reuters Logo"
+        {
+            "basicCard": {
+                "title": "Zansong Title",
+                "formatedText": "good \n bad",
+                "image": {
+                    "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
+                    "accessibilityText": "Thomason Reuters Logo"
+                }
             }
         }
-    };
-
+    ];
 }
 //Demo of Chatbot
 app.post('/slack-eiw', function (req, res) {
