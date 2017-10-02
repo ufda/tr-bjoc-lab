@@ -48,40 +48,41 @@ app.post('/dbcmd', function (req, res) {
 //Test Echo
 app.post('/echo', function (req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
-    var g_msg =  google();
     return res.json({
-//        speech: 'I am Zansong, I am 18.25, you just spoke:' + speech,
-//        displayText: speech,
+        speech: 'I am Zansong, I am 18.25, you just spoke:' + speech,
+        displayText: speech,
         source: 'webhook-eiw-demo',
         data: {
-            'google': {
-                'noInputPrompts': [],
-                'richResponse':{
-                    'items': g_msg
-                }
-            }
+            'google': google(speech)
         }
     });
 });
 
-function google(){
-    return [
-        {
-            "simpleResponse":{
-                'textToSpeech': 'I am Zansong, I am 18.25'
-            }
-        },
-        {
-            "basicCard": {
-                "title": "Zansong Title",
-                "formatedText": "good \n bad",
-                "image": {
-                    "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-                    "accessibilityText": "Thomason Reuters Logo"
+function google(speech){
+    return {
+        'noInputPrompts': [],
+        'richResponse':{
+            'items': 
+            [
+                {
+                    "simpleResponse":{
+                        'textToSpeech': speech
+                    }
+                },
+                {
+                    "basicCard": {
+                        "title": "The Answer Company!",
+                        "formatedText": "good \n bad",
+                        "image": {
+                            "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
+                            "accessibilityText": "Thomason Reuters Logo"
+                        }
+                    }
                 }
-            }
+            ]
         }
-    ];
+    }
+    
 }
 //Demo of Chatbot
 app.post('/slack-eiw', function (req, res) {
