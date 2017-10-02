@@ -54,7 +54,13 @@ app.post('/echo', function (req, res) {
         displayText: speech,
         source: 'webhook-eiw-demo',
         data: {
-            "google":g_msg
+            'google': {
+                'richResponse':{
+                    'item': [
+                        g_msg   
+                    ]
+                }
+            }
         }
     });
 });
