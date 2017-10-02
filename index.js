@@ -76,7 +76,7 @@ function google(speech){
 //                        "formatedText": "good \n bad",
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-                            "accessibilityText": "The Answer Company!",
+                            "accessibilityText": "The Answer Company!"
 //                            "height": 20,
 //                            "width": 40
                         },
