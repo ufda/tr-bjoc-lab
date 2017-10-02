@@ -54,34 +54,36 @@ app.post('/echo', function (req, res) {
         displayText: speech,
         source: 'webhook-eiw-demo',
         data: {
-            'google': {
-                'noInputPrompts': [],
-                'richResponse':{
-                    'items': g_msg
-                }
-            }
+            'google': g_msg 
         }
     });
 });
 
 function google(){
-    return [
-        {
-            "simpleResponse":{
-                'textToSpeech': 'Rich'
-            }
-        },
-        {
-            "basicCard": {
-                "title": "The Answer Company!",
-                "formatedText": "good \n bad",
-                "image": {
-                    "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-                    "accessibilityText": "Thomason Reuters Logo"
+    return {
+        'noInputPrompts': [],
+        'richResponse':{
+            'items': 
+            [
+                {
+                    "simpleResponse":{
+                        'textToSpeech': 'Rich'
+                    }
+                },
+                {
+                    "basicCard": {
+                        "title": "The Answer Company!",
+                        "formatedText": "good \n bad",
+                        "image": {
+                            "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
+                            "accessibilityText": "Thomason Reuters Logo"
+                        }
+                    }
                 }
-            }
+            ]
         }
-    ];
+    }
+    
 }
 //Demo of Chatbot
 app.post('/slack-eiw', function (req, res) {
