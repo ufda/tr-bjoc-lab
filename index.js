@@ -60,13 +60,14 @@ app.post('/echo', function (req, res) {
 
 function google(speech){
     return {
-        'noInputPrompts': [],
+//        'noInputPrompts': [],
         'richResponse':{
             'items': 
             [
                 {
                     "simpleResponse":{
-                        'textToSpeech': speech
+                        'textToSpeech': speech,
+                        'displayText':'The Answer Company!' 
                     }
                 },
                 {
@@ -76,7 +77,8 @@ function google(speech){
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
                             "accessibilityText": "Thomason Reuters Logo"
-                        }
+                        },
+                        'buttons': ['a','b']
                     }
                 }
             ]
