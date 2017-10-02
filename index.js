@@ -50,8 +50,8 @@ app.post('/echo', function (req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
     var g_msg =  google();
     return res.json({
-        speech: 'I am Zansong, I am 18.25, you just spoke:' + speech,
-        displayText: speech,
+//        speech: 'I am Zansong, I am 18.25, you just spoke:' + speech,
+//        displayText: speech,
         source: 'webhook-eiw-demo',
         data: {
             'google': {
@@ -68,12 +68,12 @@ function google(){
     return [
         {
             "simpleResponse":{
-                'textToSpeech': 'my simple response'
+                'textToSpeech': 'I am Zansong, I am 18.25'
             }
         },
         {
             "basicCard": {
-                "title": "Zansong Title",
+                "title": "The Answer Company!",
                 "formatedText": "good \n bad",
                 "image": {
                     "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
