@@ -72,20 +72,14 @@ function google(speech){
                 },
                 {
                     "basicCard": {
-                        "title": "The Answer Company!",
-                        "subtitle": "Sub The Answer Company!",
-                        "formatedText": "good \n bad",
+//                        "title": "The Answer Company!",
+//                        "formatedText": "good \n bad",
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
                             "accessibilityText": "Thomason Reuters Logo",
                             "width": 400
                         },
                         'buttons': [{
-                            "title": "ThomsonReuters",
-                            "openUrlAction": {
-                                "url": "http://www.tr.com"
-                            }
-                        },{
                             "title": "Board of Directors",
                             "openUrlAction": {
                                 "url": "https://www.thomsonreuters.com/en/about-us/board-of-directors.html"
