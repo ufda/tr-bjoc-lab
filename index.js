@@ -78,7 +78,12 @@ function google(speech){
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
                             "accessibilityText": "Thomason Reuters Logo"
                         },
-                        'buttons': ['a','b']
+                        'buttons': [{
+                            "title": "ThomsonReuters",
+                            "openUrlAction": {
+                                "url": "http://www.tr.com"
+                            }
+                        }]
                     }
                 }
             ]
