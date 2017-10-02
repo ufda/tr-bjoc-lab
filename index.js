@@ -77,8 +77,8 @@ function google(speech){
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
                             "accessibilityText": "The Answer Company!",
-                            "height": 20,
-                            "width": 40
+//                            "height": 20,
+//                            "width": 40
                         },
                         'buttons': [{
                             "title": "Board of Directors",
