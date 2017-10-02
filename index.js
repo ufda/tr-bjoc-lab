@@ -67,6 +67,12 @@ app.post('/echo', function (req, res) {
 
 function google(){
     return {
+        "simpleResponse":{
+            'textToSpeech': 'my simple response',
+            'ssml':'',
+            'displyText':'displaying my message'
+
+        },
         "basicCard": {
             "title": "Zansong Title",
             "formatedText": "good \n bad",
