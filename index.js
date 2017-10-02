@@ -56,7 +56,7 @@ app.post('/echo', function (req, res) {
         data: {
             'google': {
                 'richResponse':{
-                    'item': [
+                    'items': [
                         g_msg   
                     ]
                 }
