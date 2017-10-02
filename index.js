@@ -76,7 +76,7 @@ function google(speech){
 //                        "formatedText": "good \n bad",
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-//                            "accessibilityText": "Thomason Reuters Logo",
+                            "accessibilityText": "The Answer Company!",
                             "height": 200
 //                            "width": 400
                         },
