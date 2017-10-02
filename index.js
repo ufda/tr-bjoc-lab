@@ -76,8 +76,8 @@ function google(speech){
 //                        "formatedText": "good \n bad",
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
-                            "accessibilityText": "Thomason Reuters Logo",
-                            "height": 71
+//                            "accessibilityText": "Thomason Reuters Logo",
+                            "height": 200
 //                            "width": 400
                         },
                         'buttons': [{
