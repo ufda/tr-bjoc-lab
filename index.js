@@ -48,18 +48,17 @@ app.post('/dbcmd', function (req, res) {
 //Test Echo
 app.post('/echo', function (req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
-    var g_msg = google();
     return res.json({
         speech: 'I am Zansong, I am 18.25, you just spoke:' + speech,
         displayText: speech,
         source: 'webhook-eiw-demo',
         data: {
-            'google': g_msg
+            'google': google(speech)
         }
     });
 });
 
-function google(){
+function google(speech){
     return {
         'noInputPrompts': [],
         'richResponse':{
@@ -67,7 +66,7 @@ function google(){
             [
                 {
                     "simpleResponse":{
-                        'textToSpeech': 'Rich'
+                        'textToSpeech': speech
                     }
                 },
                 {
@@ -85,7 +84,6 @@ function google(){
     }
     
 }
-
 //Demo of Chatbot
 app.post('/slack-eiw', function (req, res) {
 
