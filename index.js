@@ -83,7 +83,13 @@ function google(speech){
                             "openUrlAction": {
                                 "url": "http://www.tr.com"
                             }
-                        }]
+                        },{
+                            "title": "Board of Directors",
+                            "openUrlAction": {
+                                "url": "https://www.thomsonreuters.com/en/about-us/board-of-directors.html"
+                            }
+                        }
+                        ]
                     }
                 }
             ]
