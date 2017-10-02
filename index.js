@@ -77,8 +77,8 @@ function google(speech){
                         "image": {
                             "url": "http://tr-bjoc-lab.herokuapp.com/logo.png",
                             "accessibilityText": "Thomason Reuters Logo",
-                            "height": 71,
-                            "width": 400
+                            "height": 71
+//                            "width": 400
                         },
                         'buttons': [{
                             "title": "Board of Directors",
