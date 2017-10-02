@@ -48,12 +48,13 @@ app.post('/dbcmd', function (req, res) {
 //Test Echo
 app.post('/echo', function (req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Hi Zhu, Seems like some problem. Speak again."
+    var g_msg =  google();
     return res.json({
         speech: 'I am Zhu, you just spoke:' + speech,
         displayText: speech,
         source: 'webhook-eiw-demo',
         data: {
-            "google":google
+            "google":g_msg
         }
     });
 });
